@@ -1,5 +1,5 @@
 {
-    "name": "Python 3.13 uv",
+    "name": "Bookworm Python 3.13",
     "image": "mcr.microsoft.com/devcontainers/python:3.13-bookworm",
     "postCreateCommand": "make setup",
     "containerEnv": {
