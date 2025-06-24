@@ -1,11 +1,15 @@
 # Azure AI with Gradio MVP
 
 ![License](https://img.shields.io/badge/license-BSD3Clause-green.svg)
-![Version Badge](https://img.shields.io/badge/version-v0.0.0-red.svg)
+![Version Badge](https://img.shields.io/badge/version-0.0.0-58f4c2.svg)
 [![CodeQL](https://github.com/qte77/Chat-MVP-Gradio/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/Chat-MVP-Gradio/actions/workflows/codeql.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/chat-mvp-gradio/badge)](https://www.codefactor.io/repository/github/qte77/chat-mvp-gradio)
+[![ruff](https://github.com/qte77/chat-mvp-gradio/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/chat-mvp-gradio/actions/workflows/ruff.yaml)
+[![pytest](https://github.com/qte77/chat-mvp-gradio/actions/workflows/pytest.yaml/badge.svg)](https://github.com/qte77/chat-mvp-gradio/actions/workflows/pytest.yaml)
+[![Link Checker](https://github.com/qte77/chat-mvp-gradio/actions/workflows/links-fail-fast.yaml/badge.svg)](https://github.com/qte77/chat-mvp-gradio/actions/workflows/links-fail-fast.yaml)
+[![Deploy Docs](https://github.com/qte77/chat-mvp-gradio/actions/workflows/generate-deploy-mkdocs-ghpages.yaml/badge.svg)](https://github.com/qte77/chat-mvp-gradio/actions/workflows/generate-deploy-mkdocs-ghpages.yaml)
 [![Open Codespace](https://img.shields.io/badge/Open%20Codespace-blue?logo=visualstudiocode&logoColor=white)](https://github.com/codespaces/new?repo=qte77/Chat-MVP-Gradio)
-[![TalkToGithub](https://img.shields.io/badge/TalkToGithub-magenta.svg)](https://talktogithub.com/qte77/Chat-MVP-Gradio)
+[![TalkToGithub](https://img.shields.io/badge/TalkToGithub-7a83ff.svg)](https://talktogithub.com/qte77/Chat-MVP-Gradio)
 
 A modular Gradio-based web app for Azure, enabling file uploads, dynamic text group interactions, and custom styling.
 

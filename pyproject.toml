@@ -79,6 +79,15 @@ explicit_package_bases = true
 
 [tool.bumpversion]
 current_version = "0.0.0"
+commit = true
+tag = true
+allow_dirty = false
+ignore_missing_version = false
+sign_tags = false
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+message = "Bump version: {current_version} → {new_version}"
+commit_args = ""
 
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
@@ -87,8 +96,8 @@ replace = "version = \"{new_version}\""
 
 [[tool.bumpversion.files]]
 filename = "README.md"
-search = "version-v{current_version}-red.svg"
-replace = "version-v{new_version}-red.svg"
+search = "version-{current_version}-58f4c2.svg"
+replace = "version-{new_version}-58f4c2.svg"
 
 [[tool.bumpversion.files]]
 filename = "src/__init__.py"
