@@ -1,0 +1,18 @@
+{
+  "markdownlint.config": {
+    "MD024": false
+  },
+  "pylint.enabled": true,
+  "pylint.args": [
+    "disable=broad-exception-caught",
+  ],
+  "python.analysis.extraPaths": ["src"],
+  "python.analysis.typeCheckingMode": "standard",
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "python.languageServer": "Pylance",
+  "python.terminal.activateEnvironment": true,
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "redhat.telemetry.enabled": false,
+}
