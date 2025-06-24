@@ -96,8 +96,8 @@ replace = "version = \"{new_version}\""
 
 [[tool.bumpversion.files]]
 filename = "README.md"
-search = "version-{current_version}-696fe9.svg"
-replace = "version-{new_version}-696fe9.svg"
+search = "version-{current_version}-magenta.svg"
+replace = "version-{new_version}-magenta.svg"
 
 [[tool.bumpversion.files]]
 filename = "src/__init__.py"
