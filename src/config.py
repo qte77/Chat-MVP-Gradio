@@ -54,7 +54,7 @@ GUI_CSS_FILE = f"{SYS_ROOT_PATH}/src/gui/gui.css"
 CHAT_DRY_RUN_NO_LOAD_ENV = False
 CHAT_SYSTEM_MESSAGE = (
     "You are a helpful assistant. "
-    "Please answer the kuser's questions as best as you can."
+    "Please answer the user's questions as best as you can."
 )
 CHAT_MAX_COMPLETION_TOKENS = 800
 CHAT_TEMPERATURE = 0.7
