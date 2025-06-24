@@ -42,6 +42,8 @@ jobs:
         run: |
           echo "OLD_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
           bump-my-version show
-          bump-my-version bump ${{ github.event.inputs.versioning_strategy }} -vv
+          git config -l
+          git log --oneline
+#           bump-my-version bump ${{ github.event.inputs.versioning_strategy }} -vv
           echo "NEW_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
 
