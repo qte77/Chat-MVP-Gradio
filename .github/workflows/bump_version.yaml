@@ -23,6 +23,11 @@ jobs:
     
       - name: Checkout repo code
         uses: actions/checkout@v4
+
+      - name: Setup Git
+        run: |
+          git config --global user.email "gha[bot]@users.noreply.github.com"
+          git config --global user.name "gha[bot]"
         
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,8 +40,7 @@ jobs:
       - name: Bump version
         id: bump_version
         run: |
-          git config --global user.email "gha[bot]@users.noreply.github.com"
-          git config --global user.name "gha[bot]"
           echo "OLD_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
           bump-my-version bump ${{ github.event.inputs.versioning_strategy }}
           echo "NEW_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
+
