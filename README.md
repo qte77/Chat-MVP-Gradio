@@ -4,7 +4,7 @@
 ![Version Badge](https://img.shields.io/badge/version-v0.0.0-red.svg)
 [![CodeQL](https://github.com/qte77/Chat-MVP-Gradio/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/Chat-MVP-Gradio/actions/workflows/codeql.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/chat-mvp-gradio/badge)](https://www.codefactor.io/repository/github/qte77/chat-mvp-gradio)
-[![Open Codespace](https://img.shields.io/badge/Open%20in%20VS%20Code-blue?logo=visualstudiocode&logoColor=white)](https://github.com/codespaces/new?repo=qte77/Chat-MVP-Gradio)
+[![Open Codespace](https://img.shields.io/badge/Open%20Codespace-blue?logo=visualstudiocode&logoColor=white)](https://github.com/codespaces/new?repo=qte77/Chat-MVP-Gradio)
 [![TalkToGithub](https://img.shields.io/badge/TalkToGithub-magenta.svg)](https://talktogithub.com/qte77/Chat-MVP-Gradio)
 
 A modular Gradio-based web app for Azure, enabling file uploads, dynamic text group interactions, and custom styling.
