@@ -48,16 +48,18 @@ def test_parse_json_response(response, expected):
     result = parse_json_response(response, AzureResponseFormat_EN)
     assert result == expected
 
-@pytest.mark.parametrize("prompt, expected", [
-    ("What is the weather like?", "Sunny"),
-    ("Invalid prompt", "Unexpected error occurred while querying Azure AI: ...")
-])
-@patch('src.chat.azure_client.AzureOpenAI')
+
+@pytest.mark.parametrize(
+    "prompt, expected",
+    [
+        ("What is the weather like?", "Sunny"),
+        ("Invalid prompt", "Unexpected error occurred while querying Azure AI: ..."),
+    ],
+)
+@patch("src.chat.azure_client.AzureOpenAI")
 def test_query_azure_ai(mock_azure_client, prompt, expected):
     # Mocking Azure OpenAI client response
-    mock_response = {
-        'choices': [{'message': {'content': 'Sunny'}}]
-    }
+    mock_response = {"choices": [{"message": {"content": "Sunny"}}]}
     mock_azure_client.return_value.chat.completions.create.return_value = mock_response
 
     result = query_azure_ai(prompt)

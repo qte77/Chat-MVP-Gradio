@@ -64,7 +64,9 @@ class AzureConfig(BaseSettings):
             validated_model_names = []
             try:
                 for model_name in values:
-                    validated_model_names.append(cls.validate_single_model_name(model_name))
+                    validated_model_names.append(
+                        cls.validate_single_model_name(model_name)
+                    )
             except Exception as e:
                 logger.exception(f"Error validating model name {model_name}: {e}")
 
