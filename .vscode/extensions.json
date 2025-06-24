@@ -1,0 +1,28 @@
+{
+    "recommendations": [
+        "github.copilot",
+        "github.vscode-github-actions",
+        "ms-azuretools.azure-dev",
+        "ms-azuretools.vscode-azureappservice",
+        "ms-azuretools.vscode-azureresourcegroups",
+        "ms-azuretools.vscode-bicep",
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.pylint",
+        "ms-python.debugpy",
+        "ms-vscode.azurecli",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.powershell",
+        "ms-vscode-remote.remote-containers",
+
+        "donjayamanne.githistory",
+        "davidanson.vscode-markdownlint",
+        "gruntfuggly.todo-tree",
+        "mechatroner.rainbow-csv",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "zainchen.json"
+    ]
+}

@@ -1,0 +1,55 @@
+name: Bump Version
+
+on:
+#  push:
+#    branches:
+#      - main
+  workflow_dispatch:
+    inputs:
+      versioning_strategy:
+        description: 'Versioning strategy (patch, minor, major)'
+        default: 'minor'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: Checkout repo code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          
+      - name: Install bump-my-version
+        run: pip install bump-my-version
+
+      - name: Bump version
+        id: bump_version
+        run: |
+          echo "OLD_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
+          bump-my-version bump ${{ github.event.inputs.versioning_strategy }}
+          echo "NEW_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
+
+      - name: Commit bumped version
+        run: |
+          OLD_VERSION=${{ steps.bump_version.outputs.old_version }}
+          NEW_VERSION=${{ steps.bump_version.outputs.new_version }}
+          git config --global user.email "gha[bot]@users.noreply.github.com"
+          git config --global user.name "gha[bot]"
+          git add .
+          git commit -m "Bump ${OLD_VERSION} ==> ${NEW_VERSION}"
+          git push
+
+      - name: Create a Git tag for the new version
+        run: |
+          git tag "${{ steps.bump_version.outputs.new_version }}"
+          git push

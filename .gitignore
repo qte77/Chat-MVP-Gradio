@@ -1,0 +1,53 @@
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environment
+venv/
+.venv/
+.env/
+env/
+
+# Azure-specific ignores
+.azure/
+*.azcli
+*.bicepparam
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+*.log.*
+*.tmp
+logs/
+temp/
+tmp/
+
+# Project-specific temporary files
+output.txt
+downloads/
+uploads/
+static/
+
+# Tests
+.pytest_cache
+
+# Miscellaneous
+*.bak
+*.swp
+*~
+*.zip
+.env
+.ruff_cache
