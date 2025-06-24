@@ -26,27 +26,30 @@ from src.gui.i18n.gui_text_en import HTML_DEFAULT_TITLE
 from src.utils.log import logger
 
 
-def load_css_file(file_path: str | Path) -> str | None:
+def load_css_file(file_path: str | Path) -> str:
     """Load CSS content from the given file path."""
 
     if not isinstance(file_path, (str, Path)):
-        raise TypeError("file_path must be str or pathlib.Path object")
+        msg = f"Must be str or pathlib.Path object: '{file_path}'"
+        logger.error(msg)
+        raise TypeError(msg) from e
     if isinstance(file_path, str):
-        file_path = Path(file_path)
-    if not file_path.exists():
-        logger.warning(f"File not found - {file_path}")
-        return None
-    if not file_path.is_file():
-        logger.warning(f"Path is not a file - {file_path}")
-        return None
+        file_path = Path(file_path).resolve()
+    if not file_path.exists() or not file_path.is_file():
+        msg = f"File not found: {file_path}"
+        logger.warning(msg)
+        raise FileNotFoundError(msg) from e
 
     try:
         return file_path.read_text(encoding="utf-8")
     except PermissionError:
-        logger.error(f"Permission denied while accessing or writing to: {file_path}")
+        msg = f"Permission denied while accessing or writing to: {file_path}"
+        logger.error(msg)
+        raise PermissionError(msg) from e
     except Exception as e:
-        print(f"Error reading file {file_path}: {e}")
-        return None
+        msg = f"Error reading file {file_path}: {e}"
+        logger.exception(msg)
+        raise Exception(msg) from e
 
 
 def convert_file_path(file: gr.File | str) -> Path:

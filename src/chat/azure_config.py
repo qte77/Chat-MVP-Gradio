@@ -63,10 +63,10 @@ class AzureConfig(BaseSettings):
         elif isinstance(values, list):
             validated_model_names = []
             try:
-                for model in values:
-                    validated_model_names.append(cls.validate_single_model_name(model))
-            except Exception:
-                pass
+                for model_name in values:
+                    validated_model_names.append(cls.validate_single_model_name(model_name))
+            except Exception as e:
+                logger.exception(f"Error validating model name {model_name}: {e}")
 
             return validated_model_names
 
@@ -101,9 +101,11 @@ def _load_chat_config() -> AzureConfig | None:
     except ValidationError as e:
         msg = f"Error loading AzureConfig: {e}"
         logger.error(msg)
+        return None
     except Exception as e:
         msg = f"Exception while loading AzureConfig: {e}"
         logger.exception(msg)
+        return None
 
 
 def load_chat_config_to_env(chat_config: AzureConfig | None = None):

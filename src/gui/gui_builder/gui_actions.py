@@ -155,10 +155,10 @@ def generate_file_preview(
 
         if only_first_file_used:
             break
-
-        csv_rows = []
-        first_column_values = []
-        second_column_values = []
+        else:
+            csv_rows = []
+            first_column_values = []
+            second_column_values = []
 
     if not csv_rows:
         csv_rows = [["Preview unavailable (no valid files)"]]

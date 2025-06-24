@@ -33,6 +33,8 @@ SYS_LOG_FORMAT_FOLDING = (
 
 # MARK: Server
 SERVER_PORT = int(getenv("PORT", "8000"))
+# FIXME Bandit - B104: hardcoded_bind_all_interfaces
+# secure "192.168.0.1"
 SERVER_NAME = "0.0.0.0"
 
 
@@ -52,9 +54,8 @@ GUI_CSS_FILE = f"{SYS_ROOT_PATH}/src/gui/gui.css"
 CHAT_DRY_RUN_NO_LOAD_ENV = False
 CHAT_SYSTEM_MESSAGE = (
     "You are a helpful assistant. "
-    "Please answer the user's questions as best as you can."
+    "Please answer the kuser's questions as best as you can."
 )
-CHAT_TEMPERATURE = 0.7
 CHAT_MAX_COMPLETION_TOKENS = 800
 CHAT_TEMPERATURE = 0.7
 CHAT_TOP_P = 1.0

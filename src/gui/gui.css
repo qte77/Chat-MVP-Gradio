@@ -34,7 +34,7 @@ div, div > *, p, h1, h2, h3 {
 }
 #upload-group {
     /* background: #f0f4fa; */
-    padding: 24px 16px 16px 16px;
+    padding: 24px 16px 16px;
     border-radius: 10px;
     margin-bottom: 16px;
 }
@@ -73,7 +73,7 @@ div, div > *, p, h1, h2, h3 {
 }
 .text-group {
     /* background: #f9f7ef; */
-    padding: 24px 16px 16px 16px;
+    padding: 24px 16px 16px;
     border-radius: 10px;
     margin-bottom: 16px;
 }
