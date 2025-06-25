@@ -44,5 +44,5 @@ jobs:
           bump-my-version show
           git config -l
           git log --oneline
-          #  bump-my-version bump ${{ github.event.inputs.versioning_strategy }} -vv
+          bump-my-version bump ${{ github.event.inputs.versioning_strategy }} -vv
           echo "NEW_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
