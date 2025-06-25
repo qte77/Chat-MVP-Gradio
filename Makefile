@@ -31,19 +31,41 @@ download_azd:
 
 install_pandoc_tex:
 	echo "Setting up pandoc and texlive ..."
-	if [ -n "$$(sudo --version 2>/dev/null)" ]; then
-		SUDO="sudo"
-	else
-		SUDO=""
+	# tools_pkgs="pandoc texlive"
+	tools_cmds="pandoc pdflatex"
+	tools_to_install=""
+	for tool in $$tools_cmds; do
+		if $$tool --version >/dev/null 2>&1; then
+			echo "$${tool} already installed: $$($$tool --version | head -n 1)"
+		else
+			tools_to_install="$${tools_to_install} $${tool}"
+		fi
+	done
+	if [ -n "$$tools_to_install" ]; then
+		# check if sudo present, assume root otherwise
+		if [ -n "$$(sudo --version 2>/dev/null)" ]; then
+			SUDO="sudo"
+		else
+			SUDO=""
+		fi
+		$$SUDO apt-get update -qq
+		# known good: pandoc 2.17.1.1, pdfTeX 3.141592653-2.6-1.40.24
+		for tool in $$tools_to_install; do
+			# TODO  remove case for indexing $tools_pkgs with $tools_cmds
+			case "$$tool" in
+				pandoc) tool_to_install="pandoc" ;;
+				pdflatex) tool_to_install="texlive" ;;
+				*) echo "Unknown tool. Exiting iteration ..." && continue ;;
+			esac
+			echo "Installing $${tool_to_install} ..."
+			$$SUDO apt-get install $$tool_to_install -y -qq 1>/dev/null || \
+				{ echo "Failed to install $${tool_to_install}. Exiting ..."; continue; }
+			$$tool --version | head -n 1
+		done
+		$$SUDO apt-get install -f -y -qq
+		$$SUDO apt-get autoclean -y -qq
+		$$SUDO apt-get autoremove -y -qq
 	fi
-	$$SUDO apt-get update -qq
-	# known good: pandoc 2.17.1.1, pdfTeX 3.141592653-2.6-1.40.24
-	$$SUDO apt-get install pandoc texlive -y -qq
-	$$SUDO apt-get install -f -y -qq
-	$$SUDO apt-get autoclean -y -qq
-	$$SUDO apt-get autoremove -y -qq
-	pandoc --version | head -n 1
-	pdflatex --version | head -n 1
 
 run_local:
 	$(MAKE) -s ruff
@@ -60,7 +82,7 @@ ruff:
 	uv run ruff check --fix
 	uv run ruff format
 
-export_reqs:
+export_reqs:  # Exports packages to requirements.txt
 	uv export --format requirements-txt --no-dev > "$(REQS_FILE)"
 
 test_all:
