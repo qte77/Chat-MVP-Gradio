@@ -1,6 +1,6 @@
 [project]
 name = "RB-MVP-Gradio"
-version = "0.0.0"
+version = "0.1.0"
 license = "bsd-3-clause"
 authors = [
     {name = "qte77", email = "qte@77.gh"}
@@ -78,7 +78,7 @@ namespace_packages = true
 explicit_package_bases = true
 
 [tool.bumpversion]
-current_version = "0.0.0"
+current_version = "0.1.0"
 ignore_missing_version = false
 allow_dirty = false
 commit = true
