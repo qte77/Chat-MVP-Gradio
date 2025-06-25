@@ -49,7 +49,7 @@ jobs:
     steps:
 
       - name: Checkout repo
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@main
         with:
           fetch-depth: 1
 
@@ -63,7 +63,7 @@ jobs:
 
       - name: Bump version
         id: bump
-        uses: callowayproject/bump-my-version@1.2.0
+        uses: callowayproject/bump-my-version@master
         env:
           BUMPVERSION_TAG: "true"
         with:
