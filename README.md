@@ -1,7 +1,7 @@
 # Azure AI with Gradio MVP
 
 ![License](https://img.shields.io/badge/license-BSD3Clause-green.svg)
-![Version Badge](https://img.shields.io/badge/version-0.0.0-58f4c2.svg)
+![Version Badge](https://img.shields.io/badge/version-0.0.0-magenta.svg)
 [![CodeQL](https://github.com/qte77/Chat-MVP-Gradio/actions/workflows/codeql.yaml/badge.svg)](https://github.com/qte77/Chat-MVP-Gradio/actions/workflows/codeql.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/qte77/chat-mvp-gradio/badge)](https://www.codefactor.io/repository/github/qte77/chat-mvp-gradio)
 [![ruff](https://github.com/qte77/chat-mvp-gradio/actions/workflows/ruff.yaml/badge.svg)](https://github.com/qte77/chat-mvp-gradio/actions/workflows/ruff.yaml)

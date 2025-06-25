@@ -38,7 +38,7 @@ nav:
   # - PRD: PRD.md
   # - User Story: UserStory.md
   - Code: docstrings.md
-  - Change Log: CHANGELOG.md
+  - Change Log: CHANGELOG
   - License: LICENSE.md
 plugins:
   - search:

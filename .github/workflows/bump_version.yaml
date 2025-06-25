@@ -1,55 +1,91 @@
-name: Bump Version
+---
+name: bump-my-version
 
 on:
-#  push:
-#    branches:
-#      - main
+  # pull_request:
+  #  types: [closed]
+  #  branches: [main]
   workflow_dispatch:
     inputs:
-      versioning_strategy:
-        description: 'Versioning strategy (patch, minor, major)'
-        default: 'minor'
+      bump_type:
+        description: '[major|minor|patch]'
+        required: true
+        default: 'patch'
         type: choice
         options:
-          - major
-          - minor
-          - patch
+        - 'major'
+        - 'minor'
+        - 'patch'
+
+env:
+  BRANCH_NEW: "bump-${{ github.run_number }}-${{ github.ref_name }}"
+  SKIP_PR_HINT: "[skip ci bump]"
+  SCRIPT_PATH: ".github/scripts"
 
 jobs:
-  bump-version:
+  bump_my_version:
+    # TODO bug? currently resulting in: Unrecognized named-value: 'env'.
+    # https://stackoverflow.com/questions/61238849/github-actions-if-contains-function-not-working-with-env-variable/61240761
+    # if: !contains(
+    #      github.event.pull_request.title,
+    #      ${{ env.SKIP_PR_HINT }}
+    #    )
+    # TODO check for PR closed by bot to avoid PR creation loop
+    # github.actor != 'github-actions'
+    # TODO split check in different steps to avoid lint warning
+    if: >
+        github.event_name == 'workflow_dispatch' || (
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.merged == true &&
+          github.event.pull_request.closed_by != 'github-actions'
+        )
     runs-on: ubuntu-latest
-
+    outputs:
+      branch_new: ${{ steps.create_branch.outputs.branch_new }}
+    permissions:
+      actions: read
+      checks: write
+      contents: write
+      pull-requests: write
     steps:
-    
-      - name: Checkout repo code
-        uses: actions/checkout@v4
-        
-      - name: Set up Python
-        uses: actions/setup-python@v5
+
+      - name: Checkout repo
+        uses: actions/checkout@main
         with:
-          python-version: '3.13'
-          
-      - name: Install bump-my-version
-        run: pip install bump-my-version
+          fetch-depth: 1
+
+      - name: Set git cfg and create branch
+        id: create_branch
+        run: |
+          git config user.email "bumped@qte77.gha"
+          git config user.name "bump-my-version"
+          git checkout -b "${{ env.BRANCH_NEW }}"
+          echo "branch_new=${{ env.BRANCH_NEW }}" >> $GITHUB_OUTPUT
 
       - name: Bump version
-        id: bump_version
-        run: |
-          echo "OLD_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
-          bump-my-version bump ${{ github.event.inputs.versioning_strategy }}
-          echo "NEW_VERSION=v$(bump-my-version show current_version)" >> $GITHUB_OUTPUT
+        id: bump
+        uses: callowayproject/bump-my-version@master
+        env:
+          BUMPVERSION_TAG: "true"
+        with:
+          args: ${{ inputs.bump_type }}
+          branch: ${{ env.BRANCH_NEW }}
 
-      - name: Commit bumped version
+      - name: "Create PR '${{ env.BRANCH_NEW }}'"
+        if: steps.bump.outputs.bumped == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          OLD_VERSION=${{ steps.bump_version.outputs.old_version }}
-          NEW_VERSION=${{ steps.bump_version.outputs.new_version }}
-          git config --global user.email "gha[bot]@users.noreply.github.com"
-          git config --global user.name "gha[bot]"
-          git add .
-          git commit -m "Bump ${OLD_VERSION} ==> ${NEW_VERSION}"
-          git push
+          src="${{ env.SCRIPT_PATH }}/create_pr.sh"
+          chmod +x "$src"
+          $src "${{ github.ref_name }}" "${{ env.BRANCH_NEW }}" "${{ env.SKIP_PR_HINT }}" "${{ steps.bump.outputs.previous-version }}" "${{ steps.bump.outputs.current-version }}"
 
-      - name: Create a Git tag for the new version
+      - name: Delete branch, PR and tag in case of failure or cancel
+        if: failure() || cancelled()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git tag "${{ steps.bump_version.outputs.new_version }}"
-          git push
+          src="${{ env.SCRIPT_PATH }}/delete_branch_pr_tag.sh"
+          chmod +x "$src"
+          $src "${{ github.repository }}" "${{ env.BRANCH_NEW }}" "${{ steps.bump.outputs.current-version }}"
+...

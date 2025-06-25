@@ -74,7 +74,7 @@ jobs:
         # TODO copy only files in nav of mkdocs.yaml
         mkdir -p "${DOC_DIR}"
         cp README.md "${DOC_DIR}/index.md"
-        cp {CHANGELOG,LICENSE}.md "${DOC_DIR}"
+        cp CHANGELOG.md LICENSE "${DOC_DIR}"
 
     - name: Generate code docstrings concat file
       run: |
