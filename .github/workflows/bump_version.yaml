@@ -32,6 +32,7 @@ jobs:
     #    )
     # TODO check for PR closed by bot to avoid PR creation loop
     # github.actor != 'github-actions'
+    # TODO split check in different steps to avoid lint warning
     if: >
         github.event_name == 'workflow_dispatch' || (
           github.event_name == 'pull_request' &&
